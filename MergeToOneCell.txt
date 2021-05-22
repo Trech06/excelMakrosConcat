@@ -1,0 +1,23 @@
+Sub MergeToOneCell()
+    Const sDELIM As String = " "
+    Dim rCell As Range
+    Dim sMergeStr As String
+    Dim Count As Integer
+   
+    Count = 0
+    If TypeName(Selection) <> "Range" Then Exit Sub   
+    With Selection
+        For Each rCell In .Cells
+            sMergeStr = sMergeStr & sDELIM & rCell.Text  
+            Count = Count + 1
+            If Count = 2 Then
+                Count = 0
+                sMergeStr = sMergeStr & ","
+            End If
+        Next rCell
+    
+    Cells(4, 14).Select
+    ActiveCell.FormulaR1C1 = sMergeStr
+    Selection.Copy
+    End With
+End Sub
